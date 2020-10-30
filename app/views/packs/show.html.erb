@@ -1,0 +1,67 @@
+<div class= "container">
+<div class="columns mt-4">
+  <div class= "column is-6">
+  <%if @pack.image.attached?%>
+    <%=image_tag @pack.image %>
+    </div>
+    <% else %>
+    <%=image_tag ("https://via.placeholder.com/649x360?text=No+image") %>
+    <% end %>
+  <div class= "column is-6">
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title has-background-link-light is-size-3 ">
+            <%=@pack.product_name%>
+            </p>
+        </header>
+                <header class="card-header">
+                <p class= "card-header-title is-size-4">
+            Price: <%=number_to_currency(@pack.price, precision: 0)%>
+                </p>
+        </header>
+  <div class="card-content">
+    <h5>Description</h5>
+    <p class="subtitle">
+      <%=@pack.desc%><br>
+      <%=@pack.company_name%>
+      <hr>
+      <h3>Choose the quantity</h3>
+      <form action="/carts" method="post">
+      <%=hidden_field_tag :authenticity_token, form_authenticity_token%>
+      <input type="hidden" name="pack_id" value="<%=@pack.id%>">
+
+      <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <select name="quantity" id="quantity" class="form-control">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        </select>
+      </div>
+
+      <button type="submit" class="is-outlined">Put it in the shopping cart</button>
+      </form>
+
+    </p>
+  </div>
+  <footer class="card-footer">
+    <p class="card-footer-item ">
+        Number of order
+    </p>
+  </footer>
+</div>
+    </div>
+</div>
+</div>
+
+<script>
+  <%if flash[:notice].present?%>
+    result = confirm("<%=flash[:notice]%>")
+
+    if(result){
+      location.href = "/carts"
+    }
+  <%end%>
+</script>

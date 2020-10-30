@@ -1,0 +1,8 @@
+{
+  "name": "machine",
+  "private": true,
+  "dependencies": {
+    "bulma": "^0.9.1",
+    "bulma-carousel": "^4.0.4"
+  }
+}

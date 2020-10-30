@@ -1,0 +1,85 @@
+<section class="hero is-dark is-small">
+  <!-- Hero head: will stick at the top -->
+  <div class="hero-head">
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <span class="navbar-burger burger" data-target="navbarMenuHeroA">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
+        <div id="navbarMenuHeroA" class="navbar-menu">
+          <div class="navbar-end">
+            
+              <%=link_to "Equipments", packs_path, class: "navbar-item is-active"%>
+            
+
+            <%if user_signed_in?%>    
+                           
+            <a href="/carts" class="navbar-item"> 
+            <i class="fas fa-shopping-cart"></i>
+           </a>
+          <div class="dropdown">
+          <div class="dropdown is-hoverable mt-2">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span><%=current_user.email%></span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                  <%=link_to "My page","/mypage", class:"button is-small is-fullwidth is-black is-inverted"%>
+                </div>
+                      <div class="dropdown-item">
+                  <%=link_to "Log out",destroy_user_session_path, method: :delete, class:"button is-small is-fullwidth is-danger is-inverted"%>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+                      <% else %>
+                      <span class="navbar-item">
+                          <%=link_to "Log in",new_user_session_path, class:"button is-link is-light"%>
+                      </span>
+                                  <span class="navbar-item">
+                                  
+                          <%=link_to "Sign up",new_user_registration_path, class:"button is-link is-light"%>
+                      </span>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+
+            <!-- Hero content: will be in the middle -->
+            <div class="hero-body">
+            
+              <div class="container has-text-centered">
+              <a href="/">
+                <img src="logo.png" alt="logo" style="width:300px; height:300px;">
+              </a>
+              </div>
+            </div>
+
+  <!-- Hero footer: will stick at the bottom -->
+  <%# <div class="hero-foot">
+    <nav class="tabs">
+      <div class="container">
+        <ul>
+          <li class="is-active"><a>Weight training</a></li>
+          <li><a>Cardio</a></li>
+          <li><a>Flexibility</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div> %>
+</section>

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="columns ">
+    <div class="column is-12 mt-5">
+        <p class="is-size-3 has-text-centered">Order History</p>
+        <div class="tile">
+            <div class="tile is-parent is-vertical">
+                <article class="tile is-child notification is-primary">
+                <p class="is-size-4">Normal orders will be displayed here.<br>
+                For special orders, please check the subscription under the menu </p>
+                </article>
+            </div>
+        </div>    
+    </div>
+  </div>
+</div>
+
+<div class="container">
+   <div class="columns ">
+    <div class="column is-12 mt-5">
+      <table class="table is-hoverable is-fullwidth">
+        <tr class="th">
+            <th>Order date</th>
+            <th>recipient</th>
+            <th>receiving location</th>
+            <th>status</th>
+            <th>details</th>
+        </tr>
+        <%@orders.each do |order|%>
+        <tr>
+            <td><%=order.created_at.strftime("%F")%></td>
+            <td><%=order.name%></td>
+            <td><%=order.email%></td>
+            <td><%=order.status%></td>
+            <td><a href="/orders/<%=order.id%>" class="button is-outlined is-primary">Details</a></td>
+        </tr>
+        <%end%>
+      </table>
+    </div>
+   </div> 
+</div>

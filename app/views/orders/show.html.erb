@@ -1,0 +1,111 @@
+<div class="container">
+    <div class="columns is-centered">
+        <div class="column is-8 mt-4 ">
+            <p class="is-size-1 has-text-centered">Confirm your order</p>
+            <%@order.order_items.each do |item|%>
+            <div class="card mt-3">
+            <header class="card-header">
+                <p class="card-header-title">
+                <%=item.pack.product_name%>
+                </p>
+            </header>
+            <div class="card-content ">
+                <div class="card-title ">
+                    <%=item.pack.company_name%>
+                </div>
+                <div class="content">
+                Quantity: <%=item.quantity%>
+                <br>
+                </div>
+            </div>
+                <a href="#" class="button is-link is-rounded is-outlined ml-3 is-small">Edit</a>
+                <a href="#" class="button is-danger is-rounded is-outlined ml-3 is-small">Delete</a>
+                <hr>
+                <p class="is-size-4 ml-3">Price: <%=item_to_currency(item)%></p>
+                <br>
+            </div>
+            <% end %>
+        </div>
+    </div>
+
+    <div class="columns is-centered">
+        <div class="column is-8 ">
+            <p class="has-text-3">Shipping info confirmation</p>
+            <form>
+                <div class="field">
+                    <label class="label">Name</label>
+                <div class="control">
+                    <input class="input" type="text" id="name" name="name">
+                </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Contact</label>
+                <div class="control">
+                    <input class="input" type="number" id="phone" name="phone">
+                </div>
+                </div>
+
+                <div class="field">
+                    <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="email" id="email" name="email">
+                </div>
+                </div>
+                <div class="field">
+                    <label class="label">Address</label>
+                    <a href="#" class="button is-dark is-outlined" id="search_address_btn">Search Address</a>
+                <div class="control mt-3">
+                    <input class="input mt-1" type="text" id="post_code" name="post_code" placeholder="post code">
+                    <input class="input mt-2" type="text" id="address_1" name="address_1" placeholder="address 1">
+                    <input class="input mt-2" type="text" id="address_2" name="address_2" placeholder="address 2">
+                </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+    <hr>
+    <p class="is-size-3">Checkout price</p><br>
+    <div class="columns is-centered">
+      <div class="column is-4  ">
+      <p class="subtitle">Total Product Price</p>
+      <p class="subtitle">Shipping Fee</p>
+      <p class="subtitle">Final Price</p>
+      </div>
+      <div class="column is-4 has-text-right">
+      <p class="subtitle mr-4"><%=number_to_currency(@order.product_price, precision: 0)%></p>
+      <p class="subtitle mr-4"><%=number_to_currency(@order.shipping_fee, precision: 0)%></p>
+      <p class="subtitle mr-4"><%=number_to_currency(@order.total_price, precision: 0)%></p>
+      </div>
+   </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+        <div class="column is-6">
+            <a href="#" class="button my-4 is-fullwidth is-warning is-large ">Pay</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    $("#search_address_btn").on("click", function(e){
+        e.preventDefault();
+        postCodePopup()
+    }
+    )
+
+    function postCodePopup() {
+            new daum.Postcode({
+        oncomplete: function(data) {
+        }
+    }).open();
+    }
+
+</script>

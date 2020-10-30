@@ -1,0 +1,75 @@
+
+<div class="container">
+<div class="mt-6 mb-2 is-size-1"> 
+<i class="fas fa-clipboard-check icon is-large"></i>
+Shoping Cart
+</div>
+</div>
+
+<hr>
+
+  
+
+<div class="container" style="width: 90%">
+    <div class="table-container ">
+<table class = "table is-striped is-hoverable is-fullwidth">
+               <thead>
+                  <tr>
+                     <th style="width: 50%">Produnct Name</th>
+                     <th >Price</th>
+                     <th>Quantity</th>
+                     <th>Total</th>
+                     <th></th>
+                  </tr>
+               </thead>
+               <% if @carts.present? %>
+               <tbody>
+               <%@carts.each do |cart|%>
+                  <tr>
+                     <td><%=cart.pack.product_name%></td>
+                     <td><%=number_to_currency(cart.pack.price, precision: 0)%></td>
+                     <td><%=cart.quantity%></td>
+                     <td><%=cart_to_currency(cart)%></td>
+                     <td>
+                     <a href="/carts/<%=cart.id%>" data-method="delete" data-confirm="Dude, really?">
+                     <i class="far fa-times-circle"></i></a>
+                     </td>
+                  </tr>
+                  <% end %>
+               </tbody>
+            </table>
+</div>
+</div>
+<hr>
+
+
+<div class="container">
+   <div class="columns mt-6">
+      <div class="column is-6  ">
+      <p class="title ml-6">Sum of price</p>
+      <p class="title ml-6">Shipping Fee</p>
+      <p class="title ml-6">Final price</p>
+      </div>
+      <div class="column has-text-right">
+      <p class="title mr-6"><%=number_to_currency(@product_price, precision: 0)%></p>
+      <p class="title mr-6"><%=number_to_currency(@shipping_fee, precision: 0)%></p>
+      <p class="title mr-6"><%=number_to_currency(@total_price, precision: 0)%></p>
+      </div>
+   </div>
+   <hr>
+      <div class="columns mt-6">
+      <div class="column is-6  ">
+         <a href="/packs"class="button is-link is-outlined">Add more to the cart!</a>
+      </div>
+      <div class="column has-text-right">
+         <form action="/orders" method="post">
+            <%=hidden_field_tag :authenticity_token, form_authenticity_token%>
+            <%@carts.each do |cart|%>
+            <input type="hidden" name="cart_id[]" value="<%=cart.id%>">
+            <% end %>
+            <button type="submit" class="button is-link is-outlined">ORDER</button>
+         </form>
+      </div>
+   </div>
+</div>
+<% end %>
