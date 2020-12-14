@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+E-commerce App for selling gym equipment
 
-Things you may want to cover:
+Youtube: https://youtu.be/Ig0IkLPZaeY
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Built for people who would like to work out in their home. Focused on the purchasing
+process through the cart system. The user will choose the items and put it into the cart and the sum of the price will be automatically calculated.
